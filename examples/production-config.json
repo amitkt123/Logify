@@ -1,0 +1,47 @@
+{
+  "timeFormat": "yyyy-MM-dd HH:mm:ss.SSS",
+  "performance": {
+    "asyncLogging": true,
+    "bufferSize": 8192,
+    "flushInterval": 1000,
+    "queueSize": 10000
+  },
+  "configurations": [
+    {
+      "levels": ["FATAL"],
+      "sink": {
+        "type": "DATABASE",
+        "connectionString": "jdbc:postgresql://prod-db:5432/logs",
+        "table": "critical_logs",
+        "columns": {
+          "timestamp": "log_time",
+          "level": "severity",
+          "namespace": "component",
+          "message": "description"
+        }
+      }
+    },
+    {
+      "levels": ["ERROR"],
+      "sink": {
+        "type": "FILE",
+        "location": "/var/log/app/errors.log",
+        "format": "[{timestamp}] ERROR [{namespace}] {message}",
+        "maxSize": "100MB",
+        "maxFiles": 10,
+        "compression": "gzip"
+      }
+    },
+    {
+      "levels": ["WARN", "INFO"],
+      "sink": {
+        "type": "FILE",
+        "location": "/var/log/app/application.log",
+        "format": "[{timestamp}] [{level}] [{namespace}] {message}",
+        "maxSize": "500MB",
+        "maxFiles": 7,
+        "compression": "gzip"
+      }
+    }
+  ]
+}

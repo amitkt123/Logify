@@ -1,0 +1,33 @@
+{
+  "timeFormat": "yyyy-MM-dd HH:mm:ss.SSS",
+  "configurations": [
+    {
+      "levels": ["FATAL", "ERROR"],
+      "sink": {
+        "type": "FILE",
+        "location": "logs/errors.log",
+        "format": "[{timestamp}] [{level}] [{namespace}] {message}",
+        "maxSize": "10MB",
+        "maxFiles": 5
+      }
+    },
+    {
+      "levels": ["WARN", "INFO"],
+      "sink": {
+        "type": "CONSOLE",
+        "format": "{timestamp} - {level}: [{namespace}] {message}",
+        "colorEnabled": true
+      }
+    },
+    {
+      "levels": ["DEBUG"],
+      "sink": {
+        "type": "FILE",
+        "location": "logs/debug.log",
+        "format": "[{timestamp}] DEBUG [{namespace}] {message}",
+        "maxSize": "50MB",
+        "maxFiles": 3
+      }
+    }
+  ]
+}
