@@ -1,0 +1,29 @@
+{
+  "timeFormat": "HH:mm:ss.SSS",
+  "configurations": [
+    {
+      "levels": ["FATAL", "ERROR", "WARN", "INFO", "DEBUG"],
+      "sink": {
+        "type": "CONSOLE",
+        "format": "{timestamp} [{level:5}] {namespace:20} | {message}",
+        "colorEnabled": true,
+        "colors": {
+          "FATAL": "red",
+          "ERROR": "red",
+          "WARN": "yellow",
+          "INFO": "green",
+          "DEBUG": "blue"
+        }
+      }
+    },
+    {
+      "levels": ["ERROR", "FATAL"],
+      "sink": {
+        "type": "FILE",
+        "location": "logs/dev-errors.log",
+        "format": "[{timestamp}] [{level}] [{namespace}] {thread} - {message}",
+        "append": true
+      }
+    }
+  ]
+}
